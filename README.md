@@ -23,31 +23,53 @@ RegisterNumber:  212223240102
 */
 ```
 import pandas as pd
+
 import numpy as np
+
 from sklearn.model_selection import train_test_split
+
 from sklearn.linear_model import LogisticRegression
+
 df = pd.read_csv('Placement_Data_Full_Class (1).csv')
+
 df.info()
+
 df.drop('sl_no',axis=1,inplace=True)
+
 df1 = ['gender','ssc_b','hsc_b','hsc_s','degree_t','workex','specialisation','status']
 
 for col in df1:
    
     df[f'{col}_c'] = df[col].astype('category').cat.codes
+
 df.drop(columns=df1,inplace=True)
+
 x = df.iloc[:,:-2].values
+
 x.shape
+
 y= df.iloc[:, -1].values
+
 y
+
 x.shape
+
 y.shape
+
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=1)
+
 x_test.shape
+
 x_train.shape
+
 model = LogisticRegression()
+
 model.fit(x_train,y_train)
+
 y_pred = model.predict(x_test)
+
 a = accuracy_score(y_test,y_pred)
+
 print(a)
 
 ## Output:
